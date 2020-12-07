@@ -73,11 +73,11 @@ export function unescapeHtml(str: string): string {
   }
 
   const res = str.replace(/&quot;/g, '"')
-    .replace(/&#39;/g, '\'')
-    .replace(/&#x3A;/g, ':')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
+    .replace(/&#39;/g, "'")
+    .replace(/&#x3A;/g, ":")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
 
   return unescapeHtml(res);
 }
