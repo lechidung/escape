@@ -1,92 +1,31 @@
-# escape
+# 🦕 deno-module-starter
 
-Simple library for escape or unescape HTML, String, SQL,...
+[Deno](https://deno.land) module starter repository.
 
-## API
+## Usage
 
-### Escape HTML
-```js
-import { escapeHtml } from "https://deno.land/x/escape/mod.ts";
+```typescript
+import { getHelloWorld } from "https://raw.githubusercontent.com/BrunnerLivio/deno-module-starter/{VERSION}/mod.ts";
+
+const helloWorld = getHelloWorld();
+console.log(helloWorld); // Prints "Hello World" in bold
 ```
 
-#### **1. escapeHtml(string: string): string**
+## Test
 
-Escape special characters in the given string of text, such that it can be
-interpolated in HTML content.
-
-This function will escape the following characters: `"`, `'`, `&`, `<`, and
-`>`.
-
-**Note** that the escaped value is only suitable for being interpolated into
-HTML as the text content of elements in which the tag does not have different
-escaping mechanisms (it cannot be placed inside `<style>` or `<script>`, for
-example, as those content bodies are not HTML, but CSS and JavaScript,
-respectively; these are known as "raw text elements" in the HTML standard).
-
-#### Example
-
-The `escapeHtml` function is designed to accept a string input of text and
-return an escaped value to interpolate into HTML.
-
-```js
-import { escapeHtml } from "https://deno.land/x/escape/mod.ts";
-
-console.log(escapeHtml("<script>sample</script>"));
-// Result: '&lt;script&gt;sample&lt;/script&gt;'
-
-```
-#### **2. isEscape(string: string): boolean**
-
-This function will check exist escape the following characters: `"`, `'`, `&`, `<`, and
-`>`.
-
-#### Example
-
-```js
-import { isEscape } from "https://deno.land/x/escape/mod.ts";
-
-console.log(isEscape("<script>sample</script>"));
-// Result: true
-
+```bash
+# unit tests
+deno ./test.ts
 ```
 
-### Un Escape HTML
-```js
-import { escapeHtml } from "https://deno.land/x/escape/mod.ts";
+## Format code
+
+```bash
+deno fmt **/*.ts
 ```
 
-#### **1. unescapeHtml(string: string): string**
+## Resources
 
-Convert HTML entities to HTML characters, e.g. &gt; converts to >.
-
-#### Example
-
-The `unescapeHtml` function is designed to accept a string input of text and
-return an un-escaped value to interpolate into HTML.
-
-```js
-import { unescapeHtml } from "https://deno.land/x/escape/mod.ts";
-
-console.log(unescapeHtml("&amp;lt;script&amp;gt;sample&amp;lt;/script&amp;gt;"));
-// Result: '<script>sample</script>'
-
-```
-
-#### **2. isUnescape(string: string): boolean**
-
-This function will check exist unescape the following characters: `&amp;`, `&gt;`, `&lt;`, `&#x3A;`, `&quot;` and
-`&#39;`.
-
-#### Example
-
-```js
-import { isUnescape } from "https://deno.land/x/escape/mod.ts";
-
-console.log(isUnescape("&amp;lt;script&amp;gt;sample&amp;lt;/script&amp;gt;"));
-// Result: true
-
-```
-
-# License
-
-[MIT](./LICENSE)
+- [Deno Website](https://deno.land)
+- [Deno Style Guide](https://deno.land/std/style_guide.md)
+- [Deno Gitter](https://gitter.im/denolife/Lobby)
