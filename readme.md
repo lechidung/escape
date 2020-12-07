@@ -1,6 +1,6 @@
 # escape
 
-Simple library for escape or unescape HTML, String, SQL,...
+Simple library for escape or unescape HTML, String, SQL,... 
 
 ## API
 
