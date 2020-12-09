@@ -3,11 +3,12 @@
  * MIT Licensed
  */
 
-const matchEscHtmlRegExp = /["'&<>]/;
-const matchUnEscRegExp = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
+const matchEscHtmlRx = /["'&<>]/;
+const matchUnEscRx = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
+const matchEscSqlRx = /[\0\b\t\n\r\x1a"'\\]/g;
 
 export function isEscape(str: string): boolean {
-  const matchEscHtml = matchEscHtmlRegExp.exec(str);
+  const matchEscHtml = matchEscHtmlRx.exec(str);
 
   if (!matchEscHtml) {
     return false;
@@ -17,7 +18,7 @@ export function isEscape(str: string): boolean {
 }
 
 export function escapeHtml(str: string): string {
-  const matchEscHtml = matchEscHtmlRegExp.exec(str);
+  const matchEscHtml = matchEscHtmlRx.exec(str);
   if (!matchEscHtml) {
     return str;
   }
@@ -58,7 +59,7 @@ export function escapeHtml(str: string): string {
 }
 
 export function isUnescape(str: string): boolean {
-  const matchUnEsc = matchUnEscRegExp.exec(str);
+  const matchUnEsc = matchUnEscRx.exec(str);
   if (!matchUnEsc) {
     return false;
   }
@@ -67,7 +68,7 @@ export function isUnescape(str: string): boolean {
 }
 
 export function unescapeHtml(str: string): string {
-  const matchUnEsc = matchUnEscRegExp.exec(str);
+  const matchUnEsc = matchUnEscRx.exec(str);
   if (!matchUnEsc) {
     return str;
   }
@@ -80,4 +81,57 @@ export function unescapeHtml(str: string): string {
     .replace(/&amp;/g, "&");
 
   return unescapeHtml(res);
+}
+
+export function escapeSql(sqlStr: string): string {
+  const match = matchEscSqlRx.exec(sqlStr);
+  if (!match) {
+    return sqlStr;
+  }
+
+  let chunkIndex = matchEscSqlRx.lastIndex = 0
+  let escapedSqlStr = '';
+  let matchChar;
+  let escape;
+
+  while ((matchChar = matchEscSqlRx.exec(sqlStr))) {
+    switch (matchChar[0]) {
+      case '\0':
+        escape = '\\0';
+        break;
+      case '\x08':
+        escape = '\\b';
+        break;
+      case '\x09':
+        escape = '\\t';
+        break;
+      case '\x1a':
+        escape = '\\z';
+        break;
+      case '\n':
+        escape = '\\n';
+        break;
+      case '\r':
+        escape = '\\r';
+        break;
+      case '\"':
+      case '\'':
+      case '\\':
+      case '%':
+        // prepends a backslash to backslash, percent, and double/single quotes
+        escape = '\\' + matchChar[0];
+        break;
+      default:
+        continue;
+    }
+
+    escapedSqlStr += sqlStr.slice(chunkIndex, matchChar.index) + escape;
+    chunkIndex = matchEscSqlRx.lastIndex
+  }
+
+  if (chunkIndex < sqlStr.length) {
+    return "'" + escapedSqlStr + sqlStr.slice(chunkIndex) + "'"
+  }
+
+  return "'" + escapedSqlStr + "'"
 }

@@ -87,6 +87,28 @@ console.log(isUnescape("&amp;lt;script&amp;gt;sample&amp;lt;/script&amp;gt;"));
 
 ```
 
+### Escape SQL
+```js
+import { escapeSql } from "https://deno.land/x/escape/mod.ts";
+```
+
+#### **1. escapeSql(SqlString: string): string**
+
+Escape SQL special characters and quotes in strings.
+
+#### Example
+
+The `unescapeHtml` function is designed to accept a sql string and
+return an escaped sql string.
+
+```js
+import { escapeSql } from "https://deno.land/x/escape/mod.ts";
+
+console.log(escapeSql("insert into table_exp values('hi, my name''s johnny.');"));
+// Result: 'insert into my_table values(\'hi, my name\'\'s tim.\');'
+
+```
+
 # License
 
 [MIT](./LICENSE)
