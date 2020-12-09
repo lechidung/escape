@@ -52,7 +52,7 @@ console.log(isEscape("<script>sample</script>"));
 
 ### Un Escape HTML
 ```js
-import { escapeHtml } from "https://deno.land/x/escape/mod.ts";
+import { unescapeHtml } from "https://deno.land/x/escape/mod.ts";
 ```
 
 #### **1. unescapeHtml(string: string): string**
