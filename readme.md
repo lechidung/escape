@@ -105,7 +105,7 @@ return an escaped sql string.
 import { escapeSql } from "https://deno.land/x/escape/mod.ts";
 
 console.log(escapeSql("insert into table_exp values('hi, my name''s johnny.');"));
-// Result: 'insert into my_table values(\'hi, my name\'\'s tim.\');'
+// Result: 'insert into my_table values(\'hi, my name\'\'s johnny.\');'
 
 ```
 
