@@ -9,7 +9,8 @@ const matchUnEscRx = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
 const matchEscSqlRx = /[\0\b\t\n\r\x1a"'\\]/g;
 
 export function isEscape(str: string): boolean {
-  const matchEscHtml = matchEscHtmlRx.exec(str);
+  const removeUnEscStr = str.replace(matchUnEscRx, "");
+  const matchEscHtml = matchEscHtmlRx.exec(removeUnEscStr);
 
   if (!matchEscHtml) {
     return false;
