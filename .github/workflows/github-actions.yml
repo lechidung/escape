@@ -15,10 +15,10 @@ jobs:
 
       # Uncomment this step to verify the use of 'deno fmt' on each commit.
       - name: Verify formatting
-        run: deno fmt --check
+        run: deno fmt --check mod.ts
 
       - name: Run linter
-        run: deno lint
+        run: deno lint mod.ts --unstable
 
       - name: Run tests
-        run: deno test -A --unstable
+        run: deno test mod.ts -A --unstable
