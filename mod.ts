@@ -5,10 +5,12 @@
 
 const matchEscHtmlRx = /["'&<>]/;
 const matchUnEscRx = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
+// deno-lint-ignore no-control-regex
 const matchEscSqlRx = /[\0\b\t\n\r\x1a"'\\]/g;
 
 export function isEscape(str: string): boolean {
-  const matchEscHtml = matchEscHtmlRx.exec(str);
+  const removeUnEscStr = str.replace(matchUnEscRx, "");
+  const matchEscHtml = matchEscHtmlRx.exec(removeUnEscStr);
 
   if (!matchEscHtml) {
     return false;
@@ -89,49 +91,49 @@ export function escapeSql(sqlStr: string): string {
     return sqlStr;
   }
 
-  let chunkIndex = matchEscSqlRx.lastIndex = 0
-  let escapedSqlStr = '';
+  let chunkIndex = matchEscSqlRx.lastIndex = 0;
+  let escapedSqlStr = "";
   let matchChar;
   let escape;
 
   while ((matchChar = matchEscSqlRx.exec(sqlStr))) {
     switch (matchChar[0]) {
-      case '\0':
-        escape = '\\0';
+      case "\0":
+        escape = "\\0";
         break;
-      case '\x08':
-        escape = '\\b';
+      case "\x08":
+        escape = "\\b";
         break;
-      case '\x09':
-        escape = '\\t';
+      case "\x09":
+        escape = "\\t";
         break;
-      case '\x1a':
-        escape = '\\z';
+      case "\x1a":
+        escape = "\\z";
         break;
-      case '\n':
-        escape = '\\n';
+      case "\n":
+        escape = "\\n";
         break;
-      case '\r':
-        escape = '\\r';
+      case "\r":
+        escape = "\\r";
         break;
-      case '\"':
-      case '\'':
-      case '\\':
-      case '%':
+      case '"':
+      case "'":
+      case "\\":
+      case "%":
         // prepends a backslash to backslash, percent, and double/single quotes
-        escape = '\\' + matchChar[0];
+        escape = "\\" + matchChar[0];
         break;
       default:
         continue;
     }
 
     escapedSqlStr += sqlStr.slice(chunkIndex, matchChar.index) + escape;
-    chunkIndex = matchEscSqlRx.lastIndex
+    chunkIndex = matchEscSqlRx.lastIndex;
   }
 
   if (chunkIndex < sqlStr.length) {
-    return "'" + escapedSqlStr + sqlStr.slice(chunkIndex) + "'"
+    return "'" + escapedSqlStr + sqlStr.slice(chunkIndex) + "'";
   }
 
-  return "'" + escapedSqlStr + "'"
+  return "'" + escapedSqlStr + "'";
 }
