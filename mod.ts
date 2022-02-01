@@ -116,7 +116,7 @@ export function escapeSql(sqlStr: string): string {
       case "\r":
         escape = "\\r";
         break;
-      case '\"':
+      case '"':
       case "'":
       case "\\":
       case "%":
