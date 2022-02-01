@@ -1,3 +1,9 @@
+# License
+[![MIT](https://img.shields.io/github/license/lechidung/escape)](./LICENSE)
+![Languages](https://img.shields.io/github/languages/top/lechidung/escape)
+![Version](https://img.shields.io/github/v/release/lechidung/escape)
+![Release date](https://img.shields.io/github/release-date/lechidung/escape)
+
 # escape
 
 Simple library for escape or unescape HTML, String, SQL,... :D
@@ -108,7 +114,3 @@ console.log(escapeSql("insert into table_exp values('hi, my name''s johnny.');")
 // Result: 'insert into my_table values(\'hi, my name\'\'s johnny.\');'
 
 ```
-
-# License
-
-[MIT](./LICENSE)
