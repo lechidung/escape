@@ -1,12 +1,14 @@
-# License
-[![MIT](https://img.shields.io/github/license/lechidung/escape)](./LICENSE)
+# Escape
+Simple library for escape or unescape HTML, String, SQL,... for Deno framework.
+
+![Deno JS](https://img.shields.io/badge/deno%20js-000000?style=for-the-badge&logo=deno&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
+![build and test workflow](https://github.com/lechidung/escape/actions/workflows/github-actions.yml/badge.svg)
 ![Languages](https://img.shields.io/github/languages/top/lechidung/escape)
 ![Version](https://img.shields.io/github/v/release/lechidung/escape)
 ![Release date](https://img.shields.io/github/release-date/lechidung/escape)
-
-# escape
-
-Simple library for escape or unescape HTML, String, SQL,... :D
+![Issues](https://img.shields.io/github/issues/lechidung/escape)
 
 ## API
 
@@ -114,3 +116,6 @@ console.log(escapeSql("insert into table_exp values('hi, my name''s johnny.');")
 // Result: 'insert into my_table values(\'hi, my name\'\'s johnny.\');'
 
 ```
+# License
+[![MIT](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
+
